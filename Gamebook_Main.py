@@ -6,113 +6,105 @@
 # The program continues until the player quits when they die
 # The program inform the player of any errors they input and doesn't crash
 
+# Data
+paragraph1 = ("\nYou awaken from your bed, feeling strange." +
+              "\nSomething is going to happen today, something" +
+              "\nbig, but you don’t know what….")
+paragraph2 = ("\nFeeling tired, you go to get a couple more moments of sleep" +
+              "\nAs you cuddle up, you feel the bed is warm…. And moist…." +
+              "\nAs you look up, you realize in horror that you are eaten " +
+              "\nby a Bedoster")
+paragraph3 = ("\nYou get up, the carpet tickles your feet." +
+              "\nYou then fall to the ground laughing at how much the" +
+              "\ncarpet tickles you. You realize you cannot breath in" +
+              "\nYou die, with a smile on you face on the carpet.")
+paragraph4 = ("\nYou sit up, stretch and let out an uplifting yawn that " +
+              "dispels the sleep from your body.\nYou get out of bed," +
+              "putting on your normal clothes, then approach the stairs" +
+              "\nBy the stairs, you see an old family chest you haven’t " +
+              "opened in years…")
+paragraph5 = ("\nYou sense an eerie presence pouring from the chest" +
+              "\nAs you approach it, it strangely seems to move and " +
+              "shift, despite being rigid" +
+              "You place both of your hands on the chest....")
+paragraph6 = ("\nYou descend the stairs, feeling relieved the more you move." +
+              "\nWhen you get to the bottom, you think that everything is " +
+              "going to be all right." +
+              "You leave the house, confident for a new day!" +
+              "\nThanks for playing\nGame Over")
+paragraph7 = ("\nThe chest is freezing, you move to remove your hands, " +
+              "but they are stuck in place." +
+              "\nThe lid opens, and the skin of the chest crawls into " +
+              "the void, dragging you along." +
+              "\nYou struggle in vain, and as the darkness surrounds you " +
+              "and the light from the lid grows fainter, you relax into " +
+              "sleep once again")
+paragraph8 = ("\nThe chest feels cool... and fleshy..." +
+              "\nSuddenly, arms unfold from the chest and grabbing your " +
+              "body, it's long fingers coiling around you like rope." +
+              "\nThe chest opens, revealing teeth, a disgusting tongue, and " +
+              "infinite darkness.")
+paragraph9 = ("\nYour hands are burning, flesh melting as you are unable " +
+              "to remove them"
+              "\nYou realize, to late, the difference between Fahrenheit " +
+              "and Celsius."
+              "\nYou blackout due to shock, as your body is pulled to the " +
+              "chest, burning into nothing.")
+
+# This function runs until the user gives a valid YES or NO to the question
+# Try Again? If yes, main program will use breaks to get back to the beginning
+# of the main loop, else main program will set end to true and end program
+
+
+def quitChoice():
+    while(True):
+        choice = input("\nTry Again? YES/NO: ")
+        choice = choice.upper()
+        if(choice == "NO"):
+            return True
+        elif(choice == "YES"):
+            return False
+        else:
+            print("\nERROR: Enter one of the all-cap words")
+
 # Quits the game when True
 end = False
 
 # Main loop of the game, continues until player explicitly quits
 while(end is False):
-    # Paragraph 1
-    print("\nYou awaken from your bed, feeling strange.")
-    print("Something is going to happen today, something")
-    print("big, but you don’t know what….")
+    print(paragraph1)
+    choice = input("Do you STAY, GET UP, or YAWN? ")  # Input for first choice
+    choice = choice.upper()  # Changes the input to all uppercase
 
-    # Input for first choice
-    choice = input("Do you STAY, GET UP, or YAWN? ")
-
-    # Changes the input to all uppercase
-    choice = choice.upper()
-
-    ##############
     # CHOICE 1-1 #
-    ##############
     if(choice == "STAY"):
-        # Paragraph 2
-        print("\nFeeling tired, you go to get a couple more moments of sleep")
-        print("As you cuddle up, you feel the bed is warm…. And moist….")
-        print("As you look up, you realize in horror that you are eaten " +
-              "by a Bedoster")
+        print(paragraph2)
+        if(quitChoice() is True):
+            end = True
 
-        # Quit Choice Block
-        while(end is False):
-            choice = input("Try Again? YES/NO: ")
-            choice = choice.upper()
-            if(choice == "NO"):
-                end = True
-            elif(choice == "YES"):
-                break
-            else:
-                print("\nERROR: Enter one of the all-cap words")
-
-    ##############
     # CHOICE 1-2 #
-    ##############
     elif(choice == "GET UP"):
-        # Paragraph 3
-        print("\nYou get up, the carpet tickles your feet. You then " +
-              "fall to the ground laughing at how much the")
-        print("Carpet tickles you. As you laugh, you realize " +
-              "you cannot breath in")
-        print("You die, with a smile on you face on the carpet")
+        print(paragraph3)
+        if(quitChoice() is True):
+            end = True
 
-        # Quit Choice Block
-        while(end is False):
-            choice = input("Try Again? YES/NO: ")
-            choice = choice.upper()
-            if(choice == "NO"):
-                end = True
-            elif(choice == "YES"):
-                break
-            else:
-                print("\nERROR: Enter one of the all-cap words")
-
-    ##############
     # CHOICE 1-3 #
-    ##############
     elif(choice == "YAWN"):
-        # Paragraph 4
-        print("\nYou sit up, stretch and let out an uplifting " +
-              "yawn that dispels the sleep from your body")
-        print("You get out of bed, putting on your normal " +
-              "clothes, then approach the stairs")
-        print("By the stairs, you see an old family chest " +
-              "you haven’t opened in years…")
-
         while(end is False):
-
-            # Input for second choice
+            print(paragraph4)
             choice = input("Do you DESCEND or INVESTIGATE? ")
+            choice = choice.upper()  # Changes the input to all uppercase
 
-            # Changes the input to all uppercase
-            choice = choice.upper()
-
-            ##############
             # CHOICE 2-1 #
-            ##############
             if(choice == "DESCEND"):
-                # Paragraph 6
-                print("\nYou descend the stairs, feeling " +
-                      "relieved the more you move.")
-                print("When you get to the bottom, you " +
-                      "think that everything is going to be all right.")
-                print("You leave the house, confident for a new day!")
-                print("\nThanks for playing \nGame Over")
+                print(paragraph6)
+                end = True  # Victory, automatically end game
 
-                # Victory, automatically end game
-                end = True
-
-            ##############
             # CHOICE 2-2 #
-            ##############
             elif(choice == "INVESTIGATE"):
                 while(end is False):
-                    # Paragraph 5
-                    print("\nYou sense an eerie presence " +
-                          "pouring from the chest")
-                    print("As you approach it, it strangely " +
-                          "seems to move and shift, despite being rigid")
-                    print("You place both of your hands on the chest....")
+                    print(paragraph5)
 
-                    # Input for third choice
                     choice = input("How hot does the chest feel? ")
 
                     # Try-Exception block to catch errors
@@ -121,88 +113,25 @@ while(end is False):
                         # Convert String of number to int
                         choice = int(choice)
 
-                        ##############
                         # CHOICE 3-1 #
-                        ##############
                         if(choice < 30):
-                            # Paragraph 7
-                            print("\nThe chest is freezing, you move " +
-                                  "to remove your hands, but they are stuck " +
-                                  "in place.")
-                            print("The lid opens, and the skin of the " +
-                                  "chest crawls into the void, dragging " +
-                                  "you along.")
-                            print("You struggle in vain, and as the " +
-                                  "darkness surrounds you and the light " +
-                                  "from the lid grows fainter, you relax " +
-                                  "into sleep once again")
-
-                            # Quit Choice Block
-                            while(end is False):
-                                choice = input("Try Again? YES/NO: ")
-                                choice = choice.upper()
-                                if(choice == "NO"):
-                                    end = True
-                                elif(choice == "YES"):
-                                    break
-                                else:
-                                    print("\nERROR: Enter one of the " +
-                                          "all-cap words")
-
-                            # Extra break to jump back to main loop
+                            print(paragraph7)
+                            if(quitChoice() is True):
+                                end = True
                             break
 
-                        ##############
                         # CHOICE 3-2 #
-                        ##############
                         elif(choice >= 30 and choice <= 60):
-                            # Paragraph 8
-                            print("\nThe chest feels cool... and fleshy...")
-                            print("Suddenly, arms unfold from the chest and " +
-                                  "grabbing your body, it's long fingers " +
-                                  "coiling around you like rope.")
-                            print("The chest opens, revealing teeth, a " +
-                                  "disgusting tongue, and infinite darkness.")
-
-                            # Quit Choice Block
-                            while(end is False):
-                                choice = input("Try Again? YES/NO: ")
-                                choice = choice.upper()
-                                if(choice == "NO"):
-                                    end = True
-                                elif(choice == "YES"):
-                                    break
-                                else:
-                                    print("\nERROR: Enter one of the " +
-                                          "all-cap words")
-                            # Extra break to jump back to main loop
+                            print(paragraph8)
+                            if(quitChoice() is True):
+                                end = True
                             break
 
-                        ##############
                         # CHOICE 3-3 #
-                        ##############
                         elif(choice > 60):
-                            # Paragraph 9
-                            print("\nYour hands are burning, flesh melting " +
-                                  "as you are unable to remove them")
-                            print("You realize, to late, the difference " +
-                                  "between Fahrenheit and Celsius.")
-                            print("You blackout due to shock, as your body " +
-                                  "is pulled to the chest, burning into " +
-                                  "nothing.")
-
-                            # Quit Choice Block
-                            while(end is False):
-                                choice = input("Try Again? YES/NO: ")
-                                choice = choice.upper()
-                                if(choice == "NO"):
-                                    end = True
-                                elif(choice == "YES"):
-                                    break
-                                else:
-                                    print("\nERROR: Enter one of " +
-                                          "the all-cap words")
-                            # Extra break to jump back to main loop
+                            print(paragraph9)
+                            if(quitChoice() is True):
+                                end = True
                             break
 
                         else:
@@ -210,12 +139,12 @@ while(end is False):
 
                     # Catch block for errors in Try block
                     except ValueError:
-                        print("ERROR: Enter a number, not a string")
+                        print("\nERROR: Enter a number, not a string")
                     except TypeError:
-                        print("ERROR: TypeError")
+                        print("\nERROR: TypeError, this shouldn't happen")
 
-                # Extra break for Quit Choice Block to get to main loop
-                break
+                break  # Choice 2, Try again, to get to main loop
+
             else:
                 print("\nERROR: Enter one of the all-cap words")
     else:
