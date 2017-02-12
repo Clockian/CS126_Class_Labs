@@ -10,26 +10,31 @@ from random import randint
 from random import choice
 
 # Advance question strings
-advancedQuestion1 = ("\nWhat is the area of a rectangle with the length %d and the width of %d? ")
+question1 = ("\nWhat is the area of a rectangle with the length %d and the\n" +
+             "width of %d? ")
 
-advancedQuestion2 = ("\nBilly and Mandy are arguing about how to split up candy. They come to an\n" +
-                     "agreement that Mandy should get two candies for every candy that Bill gets.\n" +
-                     "If there are %d candies, how many candies should Mandy receive? ")
+question2 = ("\nBilly and Mandy are arguing about how to split up candy.\n" +
+             "They come to an agreement that Mandy should get two\n" +
+             "candies for every candy that Bill gets. If there are\n" +
+             "%d candies, how many candies should Mandy receive? ")
 
-advancedQuestion3 = ("\nAlex, Fred, and John all get into a fight, and when discovered by their\n" +
-                     "parents, are severely reprimanded for it. Alex gets %d minutes of time out\n" +
-                     "and no video game for a week. John gets Alex’s timeout squared. Fred get half\n" +
-                     "as much time out as John. How much time out does Fred get? ")
+question3 = ("\nAlex, Fred, and John all get into a fight, and when\n" +
+             "discovered by their parents, are severely reprimanded for\n" +
+             "it. Alex gets %d minutes of time out and no video game\n" +
+             "for a week. John gets Alex’s timeout squared. Fred get half\n" +
+             "as much time out as John. How much time out does Fred get? ")
 
-advancedQuestion4 = ("\nEbony and Alex both agree that the fairest way to split their river pebbles\n" +
-                     "to finish their fort’s artwork is three pebbles for Ebony for every two pebbles\n" +
-                     "Alex gets. They’ve collected a combined amount of %d pebbles. How many pebbles\n" +
-                     "with they have left to throw back into the river? ")
+question4 = ("\nEbony and Alex both agree that the fairest way to split\n" +
+             "their river pebbles to finish their fort’s artwork is\n" +
+             "three pebbles for Ebony for every two pebbles Alex gets.\n" +
+             "They’ve collected a combined amount of %d pebbles. How many\n" +
+             "pebbles with they have left to throw back into the river? ")
 
-advancedQuestion5 = ("\nThe Persians have three archers for every calvary, whereas the Macedonians\n" +
-                     "have three cavalry for every five hoplites they have. The Persians have %d calvary,\n" +
-                     "whereas the Macedonians have %d Hoplites. Who has the larger army?\n" +
-                     "(Enter 0 for the Persians, enter 1 for the Macedonians): ")
+question5 = ("\nThe Persians have three archers for every calvary,\n" +
+             "whereas the Macedonians have three cavalry for every\n" +
+             "five hoplites they have. The Persians have %d calvary,\n" +
+             "whereas the Macedonians have %d Hoplites. Who has the larger\n" +
+             "army?(Enter 0 for the Persians, enter 1 for the Macedonians): ")
 
 end = False
 
@@ -42,13 +47,16 @@ while(end is False):
     # Input filter to determine inputs are good before continuing
     while(inputsCorrect is False):
         try:
-            # Cast the input to int. Raise error and repeat question if given string
-            numberOfQuestions = int(input("\nHow many question's would you like to answer? "))
+            # Cast the input to int
+            numberOfQuestions = int(input("\nHow many question's would you " +
+                                          "like to answer? "))
 
             # Determines if the inputted string is one that the program can use
-            levelOfDifficulty = input("\nWhat difficulty do you want? (Beginner, Intermediate, Advanced) ")
+            levelOfDifficulty = input("\nWhat difficulty do you want?" +
+                                      "(Beginner, Intermediate, Advanced) ")
 
-            # Convert input to all uppercase, so it doesn't matter how the user inputs the word
+            # Convert input to all uppercase, so it doesn't
+            # matter how the user inputs the word
             levelOfDifficulty = levelOfDifficulty.upper()
 
             # Valid string inputs the program can recognize
@@ -80,18 +88,20 @@ while(end is False):
             try:
                 if(coinFlip == 1):
                     questionAnswer = n1 + n2
-                    userAnswer = int(input("\nWhat's %d plus %d? " % (n1, n2))) 
+                    userAnswer = int(input("\nWhat's %d + %d? " % (n1, n2)))
                 else:
                     questionAnswer = n1 - n2
-                    userAnswer = int(input("\nWhat's %d minus %d? " % (n1, n2)))
+                    userAnswer = int(input("\nWhat's %d - %d? "
+                                           % (n1, n2)))
 
                 # Deciding if user input is right
                 if(userAnswer == questionAnswer):
                     print("\nThat's right ----- well done.")
                     correct = correct + 1
                 else:
-                    print("\nNo, I'm afraid the answer is %d." % questionAnswer)
-                    
+                    print("\nNo, I'm afraid the answer is %d."
+                          % questionAnswer)
+
             # Handles error if int cast is given a string instead
             except ValueError:
                     print("\nError: Input int, not string")
@@ -106,29 +116,29 @@ while(end is False):
             n1 = randint(1, 25)
             n2 = randint(1, 25)
 
-            # Deciding between Subtraction, Addition, Multiplication, and Division
+            # Deciding between +, -, Multiplication, and Division
             coinFlip = choice([1, 2, 3, 4])
             try:
                 if(coinFlip == 1):
-                   questionAnswer = n1 + n2
-                   userAnswer = int(input("\nWhat's %d plus %d? " % (n1, n2)))
+                    questionAnswer = n1 + n2
+                    userAnswer = int(input("\nWhat's %d + %d? " % (n1, n2)))
                 elif(coinFlip == 2):
                     questionAnswer = n1 - n2
-                    userAnswer = int(input("\nWhat's %d minus %d? " % (n1, n2)))
+                    userAnswer = int(input("\nWhat's %d - %d? " % (n1, n2)))
                 elif(coinFlip == 3):
                     questionAnswer = n1 * n2
-                    userAnswer = int(input("\nWhat's %d times %d? " % (n1, n2)))
+                    userAnswer = int(input("\nWhat's %d * %d? " % (n1, n2)))
                 else:
                     questionAnswer = n1 / n2
-                    userAnswer = int(input("\nWhat's %d divided by %d? " % (n1, n2)))      
+                    userAnswer = int(input("\nWhat's %d / %d? " % (n1, n2)))
 
                 # Deciding if user input is right
                 if(userAnswer == questionAnswer):
                     print("\nThat's right ----- well done.")
                     correct = correct + 1
                 else:
-                    print("\nNo, I'm afraid the answer is %d." % questionAnswer)
-                    
+                    print("\nIncorrect, answer is %d." % questionAnswer)
+
             # Handles error if int cast is given a string instead
             except ValueError:
                 print("\nError: Input int, not string")
@@ -147,19 +157,19 @@ while(end is False):
                 n1 = randint(1, 250)
                 n2 = randint(1, 250)
                 questionAnswer = n1 * n2
-                userAnswer = int(input(advancedQuestion1 % (n1, n2))) 
+                userAnswer = int(input(question1 % (n1, n2)))
             elif(coinFlip == 2):
                 n1 = randint(6, 500)
                 questionAnswer = (2*(n1//3))
-                userAnswer = int(input(advancedQuestion2 % (n1)))
+                userAnswer = int(input(question2 % (n1)))
             elif(coinFlip == 3):
                 n1 = randint(2, 60)
                 questionAnswer = ((n1 * n1)//2)
-                userAnswer = int(input(advancedQuestion3 % (n1)))
+                userAnswer = int(input(question3 % (n1)))
             elif(coinFlip == 4):
                 n1 = randint(5, 600)
                 questionAnswer = n1 % 5
-                userAnswer = int(input(advancedQuestion4 % (n1)))
+                userAnswer = int(input(question4 % (n1)))
             else:
                 n1 = randint(5000, 40000)
                 n2 = randint(8000, 30000)
@@ -171,34 +181,37 @@ while(end is False):
                 else:
                     # Macedonians with bigger army
                     questionAnswer = 1
-                userAnswer = input(advancedQuestion5 % (n1, n2))
-                
+                userAnswer = input(question5 % (n1, n2))
+
             # Deciding if answer is right
             if(userAnswer == questionAnswer):
                 print("\nThat's right ----- well done.")
                 correct = correct + 1
             else:
                 print("\nNo, I'm afraid the answer is %d." % questionAnswer)
-                
+
         # Handles error if int cast is given a string instead
         except ValueError:
             print("\nError: Input int, not string")
     else:
         print("\nERROR 1: End of difficulty if-tree, couldn't interpet input")
 
-    # Outputting the final output, there is separate output for the advance questions
-    if(advanceChoice == True and correct == 1):
+    # Outputting the final results, there is separate output for Advanced
+    if(advanceChoice is True and correct == 1):
         print("Well done!")
-    elif(advanceChoice == True and correct == 0):
+    elif(advanceChoice is True and correct == 0):
         print("Please ask your math teacher for help!")
     elif(correct > (numberOfQuestions * (2/3))):
-        print("\nI asked you %d questions. You go %d of them right." % (numberOfQuestions, correct))
+        print("\nI asked you %d questions. You go %d of them right."
+              % (numberOfQuestions, correct))
         print("Well done!")
     elif(correct > (numberOfQuestions * (1/3))):
-        print("\nI asked you %d questions. You go %d of them right." % (numberOfQuestions, correct))
+        print("\nI asked you %d questions. You go %d of them right."
+              % (numberOfQuestions, correct))
         print("You need more practice")
     else:
-        print("\nI asked you %d questions. You go %d of them right." % (numberOfQuestions, correct))
+        print("\nI asked you %d questions. You go %d of them right."
+              % (numberOfQuestions, correct))
         print("Please ask your math teacher for help!")
 
     # Runs until you give a valid Y or N to to quitting the program
