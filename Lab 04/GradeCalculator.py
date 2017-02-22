@@ -17,8 +17,6 @@ testScore = [293, 284, 300]
 testMax = [300, 300, 300]
 testWeight = 0.6
 
-percent_list = []
-
 
 def percentage_per_category(score_list, max_list):
     """
@@ -77,26 +75,81 @@ def weighted_score(percentage, weight):
     """
     return (percentage * weight)
 
-# Todo: Extra Credit Methods
-# Not going to do extra credit methods that deny obvious or functional
-# solution to problem
+
+def to_percent(score_list, max_list):
+    """
+    This is a trick I learned when working in Scheme. If you've gotta
+    do a recursive function, but don't have enough parameters to make
+    it work? Make another function and call it in the original.
+    """
+    return to_percent_full(score_list, max_list, [])
+
+
+def to_percent_full(score_list, max_list, percent_list):
+    """
+    Creates a list that contains percents of score and max list. This
+    method was created because the given method signature didn't have
+    enough parameters to make the recursion work
+    Parameters:
+        score_list - A list of points earned.
+        max_list - A list of maximum possible points. Should be the
+        same length as score_list.
+    Return:
+        A new list the same length as the input lists. Each value is
+        the score's percentage of the max for that particular index.
+    """
+    temp1 = score_list.pop(0)
+    temp2 = max_list.pop(0)
+
+    temp = int((temp1 / temp2) * 100)
+    percent_list.append(temp)
+
+    if len(score_list) == 0:
+        return percent_list
+    else:
+        return to_percent_full(score_list, max_list, percent_list)
+
+
+def median(score_list, max_list):
+    """
+    Finds the middlest score of the list. Adds the biggest and
+    smallest number, then divides it by two
+    Parameters:
+        score_list - A list of points earned.
+        max_list - A list of maximum possible points. Should be the
+        same length as score_list
+    Return:
+        The median percentage score of the inputs.
+    """
+    median_list = to_percent(score_list, max_list)
+
+    median_list.sort()
+    min_percent = median_list[0]
+    max_percent = median_list[len(median_list) - 1]
+
+    median_percent = int((min_percent + max_percent) / 2)
+    return median_percent
+
 
 # Print the percentages and letter grade for each category, and the final
 # weighted score and letter grade. Round the averages to the nearest percent
 homeworkPercent = percentage_per_category(homeworkScore, homeworkMax)
 homeworkTotal = weighted_score(homeworkPercent, homeworkWeight)
+homeworkMedian = median(homeworkScore, homeworkMax)
 print("Homework Grade: " + str(int(homeworkPercent)) + "%, Grade: " +
-      letter_grade(homeworkPercent))
+      letter_grade(homeworkPercent) + ", Median: " + str(homeworkMedian) + "%")
 
 quizPercent = percentage_per_category(quizScore, quizMax)
 quizTotal = weighted_score(quizPercent, quizWeight)
+quizMedian = median(quizScore, quizMax)
 print("    Quiz Grade: " + str(int(quizPercent)) + "%, Grade: " +
-      letter_grade(quizPercent))
+      letter_grade(quizPercent) + ", Median: " + str(quizMedian) + "%")
 
 testPercent = percentage_per_category(testScore, testMax)
 testTotal = weighted_score(testPercent, testWeight)
+testMedian = median(testScore, testMax)
 print("    Test Grade: " + str(int(testPercent)) + "%, Grade: " +
-      letter_grade(testPercent))
+      letter_grade(testPercent) + ", Median: " + str(testMedian) + "%")
 
 finalScore = homeworkTotal + quizTotal + testTotal
 print("   Final Score: " + str(int(finalScore)) + "%, Grade: " +
