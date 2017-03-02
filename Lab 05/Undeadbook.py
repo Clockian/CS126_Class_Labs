@@ -26,6 +26,7 @@ def update(book, status, audience, name):
     # Dictionary inside of like, number of likes, and new key values of people who already liked
     book[uniqueID] = {"Status" : status,
                       "Audience" : audience,
+                      "Name" : name,
                       "Like" : {"Likes" : 0},
                       "Unlike" : {"Unlikes" : 0}}
     print("Post made at " + str(currentTime) + " by " + name)
@@ -42,6 +43,7 @@ def like(book, id, name):
     """
     post = book[id]
     post_like = post["Like"]
+    
     numberOfLikes = post_like["Likes"]
     numberOfLikes = numberOfLikes + 1
     post_like["Likes"] = numberOfLikes
@@ -56,6 +58,12 @@ def unlike(book, id, name):
     :param name: The handle/name of the person unliking
     :return: Nothing
     """
+    post = book[id]
+    post_unlike = post["Unlike"]
+    
+    numberOfUnlikes = post_unlike["Unlikes"]
+    numberOfUnlikes = numberOfUnlikes + 1
+    post_unlike["Unlikes"] = numberOfUnlikes
 
 
 def display(book, id):
@@ -66,7 +74,14 @@ def display(book, id):
     :param id: ID of the post to be displayed
     :return: Nothing
     """
-
+    print("Time: " + str(int(time.time())))
+    post = book[id]
+    print("Groups: " + str(post["Audience"]))
+    like = post["Like"]
+    print("Likes: " + str(like["Likes"]))
+    print(str(post["Name"]) + " says " + str(post["Status"]))
+    
+"""
 something = update(book,
                    "status something",
                    ["audiecne1", "audience2"],
@@ -74,8 +89,9 @@ something = update(book,
 print(something)
 
 print(book[something])
-
+display(book, something)
 """
+
 # Initialize your empty 'book' variable before running the code below.
 
 # BarnabasCollins is adding the first post to the book variable. The posted
@@ -135,4 +151,4 @@ display(book, barnabas_one)
 display(book, barnabas_three)
 print("___________")
 display(book, casper_one)
-"""
+
