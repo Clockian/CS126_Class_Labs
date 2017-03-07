@@ -1,14 +1,16 @@
 # Made by Jasque Saydyk and Tyler Smith
 # Lab 05 - Undeadbook
 # Section 2, Feb. 22, 2017
-# Description - [TODO]
+# Description - Creates a series of methods that
+# implement a simple undead social media system
 
 # Imports
 import time
 
 # Data Structure
-# Dictionary with a dictionary inside of it containg data for thing
+# Dictionary with two dictionaries inside of it for the likes and unlikes
 book = {}
+
 
 def update(book, status, audience, name):
     """
@@ -23,14 +25,16 @@ def update(book, status, audience, name):
     currentTime = int(time.time())
     uniqueID = name + str(currentTime)
 
-    # Dictionary inside of like, number of likes, and new key values of people who already liked
-    book[uniqueID] = {"Status" : status,
-                      "Audience" : audience,
-                      "Name" : name,
-                      "Like" : {"Likes" : 0},
-                      "Unlike" : {"Unlikes" : 0}}
+    # Dictionary inside of like, number of likes,
+    # and new key values of people who already liked
+    book[uniqueID] = {"Status": status,
+                      "Audience": audience,
+                      "Name": name,
+                      "Like": {"Likes": 0},
+                      "Unlike": {"Unlikes": 0}}
     print("Post made at " + str(currentTime) + " by " + name)
     return uniqueID
+
 
 def like(book, id, name):
     """
@@ -43,11 +47,11 @@ def like(book, id, name):
     """
     post = book[id]
     post_like = post["Like"]
-    
-    numberOfLikes = post_like["Likes"]
-    numberOfLikes = numberOfLikes + 1
-    post_like["Likes"] = numberOfLikes
-    
+
+    if name not in post_like:
+        post_like["Likes"] += 1
+        post_like[name] = name
+
 
 def unlike(book, id, name):
     """
@@ -60,10 +64,10 @@ def unlike(book, id, name):
     """
     post = book[id]
     post_unlike = post["Unlike"]
-    
-    numberOfUnlikes = post_unlike["Unlikes"]
-    numberOfUnlikes = numberOfUnlikes + 1
-    post_unlike["Unlikes"] = numberOfUnlikes
+
+    if name not in post_unlike:
+        post_unlike["Unlikes"] += 1
+        post_unlike[name] = name
 
 
 def display(book, id):
@@ -79,18 +83,9 @@ def display(book, id):
     print("Groups: " + str(post["Audience"]))
     like = post["Like"]
     print("Likes: " + str(like["Likes"]))
-    print(str(post["Name"]) + " says " + str(post["Status"]))
-    
-"""
-something = update(book,
-                   "status something",
-                   ["audiecne1", "audience2"],
-                   "MyName")
-print(something)
+    print(str(post["Name"]) + " says: " + str(post["Status"]))
+    print()
 
-print(book[something])
-display(book, something)
-"""
 
 # Initialize your empty 'book' variable before running the code below.
 
@@ -151,4 +146,3 @@ display(book, barnabas_one)
 display(book, barnabas_three)
 print("___________")
 display(book, casper_one)
-
