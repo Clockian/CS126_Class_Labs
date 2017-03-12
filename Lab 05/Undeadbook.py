@@ -80,9 +80,20 @@ def display(book, id):
     """
     print("Time: " + str(int(time.time())))
     post = book[id]
-    print("Groups: " + str(post["Audience"]))
+
+    # makes it so there is no comma at the end of the 
+    counter = 0
+    audienceString = ""
+    for x in post["Audience"]:
+        audienceString = audienceString + x
+        counter += 1
+        if counter != len(post["Audience"]):
+             audienceString = audienceString + ", "
+    print("Groups: " + str(audienceString))
+    
     like = post["Like"]
     print("Likes: " + str(like["Likes"]))
+    
     print(str(post["Name"]) + " says: " + str(post["Status"]))
     print()
 
