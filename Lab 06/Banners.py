@@ -4,11 +4,11 @@
 # Description - Creates a method that prints
 # a sentance as a bunch of ASCII characters
 
-a = ["####",
-     "#  #",
-     "####",
-     "#  #",
-     "#  #"]
+a = ["#####",
+     "#   #",
+     "#####",
+     "#   #",
+     "#   #"]
 
 b = ["#### ",
      "#   #",
@@ -169,10 +169,9 @@ space = ["     ",
 
 def print_banner(sentence, alignment):
     """
-    Prints the sentance in ASCII characters
-    :param sentence:
+    Prints the sentence as special banner ASCII characters
+    :param sentence: String to be converted to banner characters
     :param alignment: 0 is horizontal, 1 is vertical
-    :return:
     """
     alphabet = {"A": a, "B": b, "C": c, "D": d, "E": e, "F": f, "G": g,
                 "H": h, "I": i, "J": j, "K": k, "L": l, "M": m, "N": n,
