@@ -1,21 +1,19 @@
 # the beginning
 
 questions = [
-              {"question": "who played the frist Batman?",
-               "answers": [
-                           "George Clooney",
-                           "Adam West",
-                           "Louis G Wilson",
-                           "Christian Bale"],
-               "correct": "3"},
-              {"question": "What's the answer to life," +
-               "the universe and everything?" +
-               "answers": [
-                           "Cheese",
-                           "42",
-                           "Tacos",
-                           "Baseball"],
-               "correct": "2"}]
+              {"Question":"Who played the frist Batman?",
+               "Answers": ["A: George Clooney",
+                           "B: Adam West",
+                           "C: Louis G Wilson",
+                           "D: Christian Bale"],
+               "Correct": "C"},
+              
+              {"Question": "What's the answer to life, the universe and everything?" +
+               "Answers": ["A: Cheese",
+                           "B: 42",
+                           "C: Tacos",
+                           "D: Baseball"],
+               "Correct": "B"}]
 print("Welcome to our CS126 Trivia Game")
 print("Win MILLIONS!!\n")
 
