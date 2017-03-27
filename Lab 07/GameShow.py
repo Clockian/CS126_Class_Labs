@@ -141,13 +141,13 @@ def mainMenu():
     each section, asks for user input in the method
     """
     # Print game title
-    print("\nBecome a Real (Fake) Millionare!!!!!!!!")
+    print("\nBecome a Real (Fake) Ten Thousandare!!!!!!!!")
 
     # Ask for user input
     while True:
         try:
             menu = int(input(
-                     "Enter the number to access"
+                     "Enter the number to access\n"
                      "1: To play the game\n" +
                      "2: To view the High score table\n" +
                      "3: To view the game's credits\n" +
@@ -192,10 +192,12 @@ def askQuestion(copyQuestions):
                 print("Correct\n")
                 # Remove the question from the list
                 del copyQuestions[0]
-                return copyQuestions
+                return (True, copyQuestions)
             else:
                 print("Wrong\n")
-                return False
+                # Remove the question from the list
+                del copyQuestions[0]
+                return (False, copyQuestions)
         # If user is wrong
         else:
             print("\nWrong input, try putting in one character")
@@ -274,26 +276,26 @@ def main():
                 wrong = False
             # If there is no questions left, you win
             if len(copyQuestions) == 0:
-                print("\nCongratulations, all questions correct")
-                print("You get a million funny money!!!!\n")
-                inputHighScore(currentCorrect)
+                print("\nCongratulations, finished the Game Show")
+                print("You get " + str(currentCorrect * 1000) +
+                      " funny money!!!!\n")
+                inputHighScore(currentCorrect * 1000)
                 printHighScoreTable()
                 newGame = True
                 programState = mainMenu()
-            # If you answer a question incorrectly
-            elif wrong is True:
-                inputHighScore(currentCorrect)
-                printHighScoreTable()
-                newGame = True
-                programState = mainMenu()
+            # How the question is normally handled
             else:
                 result = askQuestion(copyQuestions)
                 # Determine if question is correct
-                if result is False:
-                    wrong = True
+                if result[0] is False:
+                    copyQuestions = result[1]
+                    print("Your current score is: " +
+                          str(currentCorrect) + " out of 10.")
                 else:
-                    copyQuestions = result
+                    copyQuestions = result[1]
                     currentCorrect += 1
+                    print("Your current score is: " +
+                          str(currentCorrect) + " out of 10.")
 
         # View the High Score Table
         elif programState == 2:
