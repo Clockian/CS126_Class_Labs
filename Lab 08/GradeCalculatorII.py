@@ -33,26 +33,26 @@ def write_grade_report(filehandle, data):
     """
     for key in data:
         data_list = data[key]
-        weight = data_list[0]
+        weight = int(data_list[0]) / 100
         del data_list[0]
 
         # Generate Score and max lists
         score_list = []
         max_list = []
-        toggle = False
-        for x in data_list:
-            if toggle is False:
-                score_list += x
-                toggle = True
+        for i, x in enumerate(data_list):
+            if i % 2 == 1:
+                max_list.append(x)
             else:
-                max_list += x
-                toggle = False
+                score_list.append(x)
 
-        score_list = list(map(int, score_list))
-        max_list = list(map(int, max_list))
-        
+        # score_list = list(map(int, score_list))
+        # max_list = list(map(int, max_list))
+
+        for i, x in enumerate(score_list):
+            score_list[i] = int(x)
+            max_list[i] = int(max_list[i])
+
         average = percentage_per_category(score_list, max_list)
-        average = int(average)
         grade = letter_grade(average)
         overall = weighted_score(average, weight)
 
@@ -65,7 +65,7 @@ def write_grade_report(filehandle, data):
         </ul>
         """
 
-        whole = wrapper % (key, weight, average, grade, overall)
+        whole = wrapper % (key, weight * 100, average, grade, overall)
 
         filehandle.write(whole)
     filehandle.close()
@@ -84,7 +84,7 @@ def percentage_per_category(score_list, max_list):
     """
     numerator = sum(score_list)
     denominator = sum(max_list)
-    return ((numerator/denominator) * 100)
+    return numerator / denominator
 
 
 def letter_grade(percent):
@@ -97,16 +97,16 @@ def letter_grade(percent):
         The string "A", "B", "C", "D", "F" depending on the percentage, at
         the 90%, 80%, 70%, 60% thresholds.
     """
-    if percent >= 90:
+    if percent >= .90:
         return "A"
 
-    elif percent >= 80:
+    elif percent >= .80:
         return "B"
 
-    elif percent >= 70:
+    elif percent >= .70:
         return "C"
 
-    elif percent >= 60:
+    elif percent >= .60:
         return "D"
 
     else:
@@ -126,7 +126,7 @@ def weighted_score(percentage, weight):
         returns a floating point number representing the amount the
         given category contributes to the overall grade.
     """
-    return (percentage * weight)
+    return percentage * weight
 
 
 def to_percent(score_list, max_list):
