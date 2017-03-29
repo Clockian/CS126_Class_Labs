@@ -31,6 +31,7 @@ def write_grade_report(filehandle, data):
     :param data - Your structure holding all grade data
     :return None
     """
+    total = 0.0
     for key in data:
         data_list = data[key]
         weight = int(data_list[0]) / 100
@@ -55,7 +56,7 @@ def write_grade_report(filehandle, data):
         average = percentage_per_category(score_list, max_list)
         grade = letter_grade(average)
         overall = weighted_score(average, weight)
-
+        total += overall
         wrapper = """
         <h1>%s Statistics (%s)</h1>
         <ul>
@@ -65,9 +66,16 @@ def write_grade_report(filehandle, data):
         </ul>
         """
 
-        whole = wrapper % (key, weight * 100, average, grade, overall)
+        whole = wrapper % (key, weight * 100, round(average, 2), grade, round(overall, 3))
 
         filehandle.write(whole)
+    filehandle.write("""
+    <h1>Cumulative Grade</h1>
+    <ul>
+        <li><b>Average: </b>%s</li>
+        <li><b>Letter Grade: </b>%s</li>
+    </ul>
+    """ % (round(total, 2), letter_grade(total)))
     filehandle.close()
 
 
