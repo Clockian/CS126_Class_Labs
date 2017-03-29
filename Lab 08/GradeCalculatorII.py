@@ -12,12 +12,9 @@ def read_grade_data(filehandle):
     :return Data structure of your design, containing all of the information
     in the file
     """
-    next = filehandle.readline()
     dataStructure = {}
-    while next != "":
-        print(next)
-        next = filehandle.readline()
-        s = next.replace('%', ' ')
+    for nextLine in filehandle:
+        s = nextLine.replace('%', ' ')
         s = s.replace(',', ' ')
         s = s.replace('/', ' ')
         s = s.split()
@@ -49,18 +46,22 @@ def write_grade_report(filehandle, data):
                 toggle = True
             else:
                 max_list += x
-                toggle = false
+                toggle = False
 
-        average = percent_per_category(score_list, max_list)
+        score_list = list(map(int, score_list))
+        max_list = list(map(int, max_list))
+        
+        average = percentage_per_category(score_list, max_list)
+        average = int(average)
         grade = letter_grade(average)
         overall = weighted_score(average, weight)
 
         wrapper = """
-        <h1>%s Statistics (%d)</h1>
+        <h1>%s Statistics (%s)</h1>
         <ul>
-            <li><b>Average:</b>%d</li>
-            <li><b>Letter Grade:</b>%d</li>
-            <li><b>Overall Grade Contribution:</b>%d</li>
+            <li><b>Average:</b>%s</li>
+            <li><b>Letter Grade:</b>%s</li>
+            <li><b>Overall Grade Contribution:</b>%s</li>
         </ul>
         """
 
@@ -68,9 +69,6 @@ def write_grade_report(filehandle, data):
 
         filehandle.write(whole)
     filehandle.close()
-        
-
-def generateHTML(filehandle, weight, average):
 
 
 def percentage_per_category(score_list, max_list):
@@ -187,4 +185,9 @@ def median(score_list, max_list):
 
 
 # Main of program
-#if __name__ == "__main__":
+if __name__ == "__main__":
+    filehandle = open("lab8input.txt", "r")
+    dataStructure = read_grade_data(filehandle)
+    filehandle = open("grade_calc_output1.html", "w")
+    write_grade_report(filehandle, dataStructure)
+
