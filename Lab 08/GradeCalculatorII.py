@@ -12,6 +12,18 @@ def read_grade_data(filehandle):
     :return Data structure of your design, containing all of the information
     in the file
     """
+    next = filehandle.readline()
+    dataStructure = {}
+    while next != "":
+        print(next)
+        next = filehandle.readline()
+        s = next.replace('%', ' ')
+        s = s.replace(',', ' ')
+        s = s.replace('/', ' ')
+        s = s.split()
+        name = s[0]
+        del s[0]
+        dataStructure[name] = s
     return dataStructure
 
 
@@ -22,6 +34,43 @@ def write_grade_report(filehandle, data):
     :param data - Your structure holding all grade data
     :return None
     """
+    for key in data:
+        data_list = data[key]
+        weight = data_list[0]
+        del data_list[0]
+
+        # Generate Score and max lists
+        score_list = []
+        max_list = []
+        toggle = False
+        for x in data_list:
+            if toggle is False:
+                score_list += x
+                toggle = True
+            else:
+                max_list += x
+                toggle = false
+
+        average = percent_per_category(score_list, max_list)
+        grade = letter_grade(average)
+        overall = weighted_score(average, weight)
+
+        wrapper = """
+        <h1>%s Statistics (%d)</h1>
+        <ul>
+            <li><b>Average:</b>%d</li>
+            <li><b>Letter Grade:</b>%d</li>
+            <li><b>Overall Grade Contribution:</b>%d</li>
+        </ul>
+        """
+
+        whole = wrapper % (key, weight, average, grade, overall)
+
+        filehandle.write(whole)
+    filehandle.close()
+        
+
+def generateHTML(filehandle, weight, average):
 
 
 def percentage_per_category(score_list, max_list):
@@ -138,5 +187,4 @@ def median(score_list, max_list):
 
 
 # Main of program
-if __name__ == "__main__":
-    
+#if __name__ == "__main__":
