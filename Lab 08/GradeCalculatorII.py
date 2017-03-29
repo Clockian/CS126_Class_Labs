@@ -1,8 +1,9 @@
-# Made by Jasque Saydyk and 
+# Made by Jasque Saydyk and Ian Otto
 # Lab 08 - Game Show
 # Section 2, Mar. 27, 2017
 # Description - Creates a Grade Calculator that reads from a text
 # file and outputs to an HTML file
+
 
 def read_grade_data(filehandle):
     """
@@ -66,7 +67,8 @@ def write_grade_report(filehandle, data):
         </ul>
         """
 
-        whole = wrapper % (key, weight * 100, round(average, 2), grade, round(overall, 3))
+        whole = wrapper % (key, weight * 100, round(average, 2),
+                           grade, round(overall, 3))
 
         filehandle.write(whole)
     filehandle.write("""
@@ -198,4 +200,3 @@ if __name__ == "__main__":
     dataStructure = read_grade_data(filehandle)
     filehandle = open("grade_calc_output1.html", "w")
     write_grade_report(filehandle, dataStructure)
-
