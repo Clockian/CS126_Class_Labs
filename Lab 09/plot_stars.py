@@ -181,15 +181,15 @@ def plot_constellations(pic_size, star_names, star_coords, constellations):
     pencolor("yellow")
     pd()
     pensize(3)
-    print("here1?")
+    # print("here1?")
     for star_key in constellations:
         # Set up information for origin star for future drawing
         star_key_draper_num = star_names[star_key]
         star_key_coords = star_coords[star_key_draper_num]
-        print("here2?")
+        # print("here2?")
         connecting_stars = constellations[star_key]
         for star in connecting_stars:
-            print("here3?")
+            # print("here3?")
             # Set up information for destination star for drawing
             star_draper_num = star_names[star]
             star_coords = star_coords[star_draper_num]
