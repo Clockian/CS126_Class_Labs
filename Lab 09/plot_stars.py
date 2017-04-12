@@ -157,12 +157,51 @@ def read_constellation_lines(file):
     """
     Extra Credit(optional)
     """
+    star_dict = {}
+    for nextLine in file:
+        print("here?")
+        s = nextLine.split(",")
+        origin = s[0]
+        destination = s[1]
+        if origin in star_dict:
+            cur_list = star_dict[origin]
+            cur_list.append(destination)
+            star_dict[origin] = cur_list
+        else:
+            cur_list = [destination]
+            star_dict[origin] = cur_list
+    return star_dict
 
 
 def plot_constellations(pic_size, star_names, star_coords, constellations):
     """
     Extra Credit(optional)
     """
+    # Color for the constellations
+    pencolor("yellow")
+    pd()
+    pensize(3)
+    print("here1?")
+    for star_key in constellations:
+        # Set up information for origin star for future drawing
+        star_key_draper_num = star_names[star_key]
+        star_key_coords = star_coords[star_key_draper_num]
+        print("here2?")
+        connecting_stars = constellations[star_key]
+        for star in connecting_stars:
+            print("here3?")
+            # Set up information for destination star for drawing
+            star_draper_num = star_names[star]
+            star_coords = star_coords[star_draper_num]
+
+            # Convert coordinates, then use them to draw
+            converted_star_x = int(float(star_coords[0]) * 100)
+            converted_star_y = int(float(star_coords[1]) * 100)
+            setposition(converted_star_x, converted_star_y)
+
+            converted_star_key_x = int(float(star_key_coords[0]) * 100)
+            converted_star_key_y = int(float(star_key_coords[1]) * 100)
+            setposition(converted_star_key_x, converted_star_key_y)
 
 
 # Main of program
@@ -170,5 +209,8 @@ if __name__ == "__main__":
     filehandle = open("stars.txt", "r")
     dicts = read_coords(filehandle)
     coordinates_dict = dicts[0]
-    # plot_plain_stars(220, coordinates_dict)
-    plot_by_magnitude(220, coordinates_dict, dicts[1])
+    plot_plain_stars(220, coordinates_dict)
+    # plot_by_magnitude(220, coordinates_dict, dicts[1])
+    # constellationhandle = open("Bootes_lines.txt", "r")
+    # con_dict = read_constellation_lines(constellationhandle)
+    # plot_constellations(220, dicts[2], dicts[0], con_dict)
