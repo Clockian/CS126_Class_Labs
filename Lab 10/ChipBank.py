@@ -1,12 +1,16 @@
+# Made by Jasque Saydyk and Miguel Quinones
+# Lab 10 - Casino Night
+# Section 2, April 12, 2017
+# Description - Represents a basic bank
+
+
 class ChipBank:
 
-    
     def __init__(self, value):
         """
         :param value - Numeric value to start the ChipBank balance at
         """
         self.value = value
-
 
     def withdraw(self, amount):
         """
@@ -28,22 +32,20 @@ class ChipBank:
         """
         self.value += amount
 
-
-    def get_balance():
+    def get_balance(self):
         """
-        return Numeric balance currently helf in ChipBank
+        :return Numeric balance currently held in ChipBank
         """
         return self.value
 
-
-    def record(handle):
+    def record(self, handle):
         """
-        This function logs deposits and withdraws to a 
+        Extra Credit - Seems to require Python Logging
+        This function logs deposits and withdraws to an external file
         :param handle - File handle to write to a file
         """
 
-
-    def __str__():
+    def __str__(self):
         """
         :return String describing the different chips held along with the total
             balance. Black chips - 100, Green chips - 25, Red chips - 5, Blue
@@ -51,14 +53,15 @@ class ChipBank:
         """
         amount = self.value
 
-        black_num = self.value % 100
+        black_num = amount // 100
         amount -= black_num * 100
 
-        green_num = self.value % 25
+        green_num = amount // 25
         amount -= green_num * 25
 
-        red_num = self.value % 5
+        red_num = amount // 5
         amount -= red_num * 5
 
-        return str(black_num + " blacks, " + green_num + " greens, " + red_num +
-                   " reds, " + amount + " blues - totaling $" + self.value)
+        return (str(black_num) + " blacks, " + str(green_num) + " greens, " +
+                str(red_num) + " reds, " + str(amount) +
+                " blues - totaling $" + str(self.value))
