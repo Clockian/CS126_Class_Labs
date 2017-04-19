@@ -1,11 +1,10 @@
 class Adventurer:
     # Encapsulates the concept of an adventurer.
 
-    def __init__(self,name,hit_points,defense,magic_defense,initiative):
-        """Creates an adventurer with private attributes.
-
+    def __init__(self, name, hit_points, defense, magic_defense, initiative):
+        """
+        Creates an adventurer with private attributes.
         Adds _name,_hit_points,_defense,_magic_defense, and _initiative to self, with values provided by the arguments.
-
         """
         self._name = name
         self._HP = hit_points
@@ -60,32 +59,32 @@ class Adventurer:
             print(str(self._name) + " suffers " + str(applied_damage) + " damage after " + str(self._MD) +
                   " defense and has " + str(self._HP) + " hit points left.")
 
-    def set_Adventurer_name(self,AName):
+    def set_name(self,AName):
         AName = name
 
-    def get_Adventurer_name(self):
+    def get_name(self):
         return self._name
 
-    def set_Adventurer_hit_points(self,HP):
+    def set_HP(self,HP):
         HP = hit_points
 
-    def get_Adventurer_hit_points(self):
+    def get_HP(self):
         return self._HP
 
-    def set_Adventurer_defense(self,D):
+    def set_defense(self,D):
         D = defense
 
-    def get_Adventurer_defense(self):
+    def get_defense(self):
         return self._defense
 
-    def set_Adventurer_magic_defense(self,MD):
+    def set_magic_defense(self,MD):
         MD = magic_defense
 
-    def get_Adventurer_magic_defense(self):
+    def get_magic_defense(self):
         return self._MD
 
-    def set_Adventurer_initiative(self,I):
+    def set_initiative(self,I):
         I = initiative
 
-    def get_Adventurer_initiative(self):
+    def get_initiative(self):
         return self._initiative

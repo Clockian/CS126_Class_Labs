@@ -2,7 +2,8 @@
 # Lab 11 - RPG
 # Section 2, April 19, 2017
 # Description - Represents a Wizard class
-
+from Adventurer import *
+from Attack import *
 
 class Wizard(Adventurer):
     """
@@ -57,5 +58,5 @@ class Wizard(Adventurer):
         """
         s = (str(self.get_name()) + " with " + self._HP +
              " hit points and a " + str(melee.get_name()) + " attack (" +
-             str(melee.get_number_of_die) + "d" + str(melee.get_sides_of_die))
+             str(self.melee.get_number_of_die) + "d" + str(self.melee.get_sides_of_die))
         return s

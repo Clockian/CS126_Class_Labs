@@ -2,9 +2,13 @@
 # Lab 11 - RPG
 # Section 2, April 19, 2017
 # Description - Main class for running and testing code
+from Adventurer import *
+from Fighter import *
+from Wizard import *
 
-
-if name == ” main ”:
+print("here1")
+if __name__ == "__main__":
+    print("here2")
     # Create a Fighter object by providing a name and
     # initiative value to the Fighter constructor, and print the object out
     a = Fighter("Aragorn", 20)
@@ -12,7 +16,7 @@ if name == ” main ”:
 
     # Create a Wizard object, using the Wizard constructor with similar
     # information as that provided for Fighter, and print the object out
-    b = Fighter("Gandalf", 20)
+    b = Wizard("Gandalf", 20)
     print("Created: ", b)
 
     # Create a variable to keep track of the rounds of combat

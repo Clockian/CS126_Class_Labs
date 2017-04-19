@@ -2,7 +2,8 @@
 # Lab 11 - RPG
 # Section 2, April 19, 2017
 # Description - Represents a Fighter
-
+from Adventurer import *
+from Attack import *
 
 class Fighter(Adventurer):
     """
@@ -18,6 +19,7 @@ class Fighter(Adventurer):
     _HP = 40
     _DEF = 10
     _MAG_DEF = 4
+    #_melee = Attack("Slash", 1, 8, "physical")
 
     def __init__(self, name, initiative):
         """
@@ -32,7 +34,7 @@ class Fighter(Adventurer):
         """
         super().__init__(name, Fighter._HP, Fighter._DEF, Fighter._MAG_DEF,
                          initiative)
-        self._melee = Attack(”Slash”, 1, 8, ”physical”)
+        self._melee = Attack("Slash", 1, 8, "physical")
 
     def strike(self):
         """
@@ -63,6 +65,6 @@ class Fighter(Adventurer):
         attack, so 1d8 means 1 die with 8 sides is rolled.
         """
         s = (str(self.get_name()) + " with " + str(self._HP) +
-             " hit points and a " + str(melee.get_name()) + " attack (" +
-             str(melee.get_number_of_die) + "d" + str(melee.get_sides_of_die))
+             " hit points and a " + str(self.melee.get_name()) + " attack (" +
+             str(Attack("Slash", 1, 8, "physical").get_number()) + "d" + str(Attack("Slash", 1, 8, "physical").get_sides()))
         return s
