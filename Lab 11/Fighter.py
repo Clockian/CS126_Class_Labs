@@ -2,13 +2,13 @@
 # Lab 11 - RPG
 # Section 2, April 19, 2017
 # Description - Represents a Fighter
+# Encapsulates a Fighter class, inheriting from Adventurer.
 from Adventurer import *
 from Attack import *
 
+
 class Fighter(Adventurer):
     """
-    Encapsulates a Fighter class, inheriting from Adventurer.
-
     Fighters are defined by 40 health point ( HP), defense of 10 ( DEF),
     and magic defense ( MAG DEF) of 4, which are stored as class variables.
 
@@ -19,7 +19,6 @@ class Fighter(Adventurer):
     _HP = 40
     _DEF = 10
     _MAG_DEF = 4
-    #_melee = Attack("Slash", 1, 8, "physical")
 
     def __init__(self, name, initiative):
         """
@@ -49,11 +48,12 @@ class Fighter(Adventurer):
         Also prints out information about the strike, something like
         ’Aragorn attacks with Slash for 5 physical damage.’
         """
-        damage = melee.getDamage()
-        attack_type = melee.get_attack_type()
+        damage = self._melee.get_damage()
+        attack_type = self._melee.get_type()
 
-        print(str(self.get_name()) + " attacks with " + str(attack_type) +
-              " for " + str(melee.get_name()) + str(damage) + " damage.")
+        print(str(self.get_name()) + " attacks with " +
+              str(self._melee.get_name()) + " for " + str(damage) + " " +
+              str(attack_type) + " damage.")
 
         return (damage, attack_type)
 
@@ -65,6 +65,7 @@ class Fighter(Adventurer):
         attack, so 1d8 means 1 die with 8 sides is rolled.
         """
         s = (str(self.get_name()) + " with " + str(self._HP) +
-             " hit points and a " + str(self.melee.get_name()) + " attack (" +
-             str(Attack("Slash", 1, 8, "physical").get_number()) + "d" + str(Attack("Slash", 1, 8, "physical").get_sides()))
+             " hit points and a " + str(self._melee.get_name()) + " attack (" +
+             str(self._melee.get_number()) + "d" +
+             str(self._melee.get_sides()) + ")")
         return s

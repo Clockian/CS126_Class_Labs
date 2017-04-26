@@ -2,13 +2,13 @@
 # Lab 11 - RPG
 # Section 2, April 19, 2017
 # Description - Represents a Wizard class
+# Encapsulates a Wizard class, inheriting from Adventurer.
 from Adventurer import *
 from Attack import *
 
+
 class Wizard(Adventurer):
     """
-    Encapsulates a Wizard class, inheriting from Adventurer.
-
     Wizards have 20 HP, defense of 4, and magic defense of 10, all
     stored as class variables using the same naming conventions as Fighter.
     """
@@ -43,11 +43,12 @@ class Wizard(Adventurer):
         Also prints out information about the attack, much like in Fighter’s
         attack method.
         """
-        damage = melee.getDamage()
-        attack_type = melee.get_attack_type()
+        damage = self._melee.get_damage()
+        attack_type = self._melee.get_type()
 
-        print(str(self.get_name()) + " attacks with " + str(attack_type) +
-              " for " + str(melee.get_name()) + str(damage) + " damage.")
+        print(str(self.get_name()) + " attacks with " +
+              str(self._melee.get_name()) + " for " + str(damage) + " " +
+              str(attack_type) + " damage.")
 
         return (damage, attack_type)
 
@@ -56,7 +57,8 @@ class Wizard(Adventurer):
         Returns a string representation of this object, much like
         in Fighter’s str method.
         """
-        s = (str(self.get_name()) + " with " + self._HP +
-             " hit points and a " + str(melee.get_name()) + " attack (" +
-             str(self.melee.get_number_of_die) + "d" + str(self.melee.get_sides_of_die))
+        s = (str(self.get_name()) + " with " + str(self._HP) +
+             " hit points and a " + str(self._melee.get_name()) +
+             " attack (" + str(self._melee.get_number()) + "d" +
+             str(self._melee.get_sides()) + ")")
         return s
