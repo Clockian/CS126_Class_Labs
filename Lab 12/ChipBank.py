@@ -1,6 +1,6 @@
-# Made by Jasque Saydyk and Miguel Quinones
-# Lab 10 - Casino Night
-# Section 2, April 12, 2017
+# Made by Jasque Saydyk and Ian Otto
+# Lab 12 - Blackjack
+# Section 2, May 1, 2017
 # Description - Represents a basic bank
 
 
@@ -11,6 +11,7 @@ class ChipBank:
         :param value - Numeric value to start the ChipBank balance at
         """
         self.value = value
+        self._log_file = None
 
     def withdraw(self, amount):
         """
@@ -18,12 +19,14 @@ class ChipBank:
         :return Numeric value actually withdrawn, if bank is less than amount,
             returns all of the money possible
         """
-        if amount >= self.value:
-            withdrawn = self.value
+        pBalance = self.value
+        if pBalance - amount <= 0:
             self.value = 0
-            return withdrawn
+            self.record_change(-amount)
+            return pBalance
         else:
             self.value -= amount
+            self.record_change(-amount)
             return amount
 
     def deposit(self, amount):
@@ -31,6 +34,7 @@ class ChipBank:
         :param amount - Numeric amount to deposit
         """
         self.value += amount
+        self.record_change(amount)
 
     def get_balance(self):
         """
@@ -38,12 +42,21 @@ class ChipBank:
         """
         return self.value
 
+    def record_change(self, amount):
+        """
+        :param amount - Number to be log as the transaction
+        """
+        if self._log_file is None:
+            pass
+        else:
+            self._log_file.write(str(self.value) + " " + str(amount) + "\n")
+
     def record(self, handle):
         """
-        Extra Credit - Seems to require Python Logging
         This function logs deposits and withdraws to an external file
         :param handle - File handle to write to a file
         """
+        self._log_file = handle
 
     def __str__(self):
         """
@@ -51,17 +64,18 @@ class ChipBank:
             balance. Black chips - 100, Green chips - 25, Red chips - 5, Blue
             chips - 1. Ex: " 1 blacks, 2 greens - totaling $150"
         """
-        amount = self.value
+        temp_val = self.value
 
-        black_num = amount // 100
-        amount -= black_num * 100
+        blacks = temp_val // 100
+        temp_val -= blacks * 100
 
-        green_num = amount // 25
-        amount -= green_num * 25
+        greens = temp_val // 25
+        temp_val -= greens * 25
 
-        red_num = amount // 5
-        amount -= red_num * 5
+        reds = temp_val // 5
+        temp_val -= reds * 5
 
-        return (str(black_num) + " blacks, " + str(green_num) + " greens, " +
-                str(red_num) + " reds, " + str(amount) +
-                " blues - totaling $" + str(self.value))
+        blues = temp_val
+
+        return "%d blacks, %d greens, %d reds, %d blues, totaling $%d" %\
+               (blacks, greens, reds, blues, self.value)

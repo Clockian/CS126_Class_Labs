@@ -1,14 +1,15 @@
-# Made by Jasque Saydyk and Miguel Quinones
-# Lab 10 - Casino Night
-# Section 2, April 12, 2017
+# Made by Jasque Saydyk and Ian Otto
+# Lab 12 - Blackjack
+# Section 2, May 1, 2017
 # Description - Represents a basic, western playing card
 
 
 class Card:
 
-    card_face = False
-    card_rank = "None"
-    card_suit = "None"
+    _face = False
+    _suit = "None"
+    _name = "None"
+    _value = 0
 
     def __init__(self, card_num):
         """
@@ -18,10 +19,10 @@ class Card:
             Spades to King of Spades, next 13 is Ace of Hearts to King of
             Hearts, and so forth
         """
-        self.card_num = card_num
-        self.auto_assign_rank_and_suit()
+        self._card_num = card_num + 1
+        self.auto_assign_name_and_suit()
 
-    def auto_assign_rank_and_suit(self):
+    def auto_assign_name_and_suit(self):
         """
         Intended for internal class use only
         Auto assigns the variables below based on the card_num given
@@ -29,109 +30,66 @@ class Card:
             Clover, and Diamond
         card_rank - The rank of the card, Ace, Jack, Queen, or King
         """
-        # Spades suits
-        if self.card_num is 0:
-            self.card_rank = "Ace"
-            self.card_suit = "Spades"
-        elif self.card_num > 0 and self.card_num < 10:
-            self.card_rank = str(self.card_num + 1)
-            self.card_suit = "Spades"
-        elif self.card_num is 10:
-            self.card_rank = "Jack"
-            self.card_suit = "Spades"
-        elif self.card_num is 11:
-            self.card_rank = "Queen"
-            self.card_suit = "Spades"
-        elif self.card_num is 12:
-            self.card_rank = "King"
-            self.card_suit = "Spades"
+        # Uses card's number to find its Suit
+        if self._card_num <= 13:
+            self._suit = 'Spades'
+        elif self._card_num <= 26:
+            self._suit = 'Hearts'
+        elif self._card_num <= 39:
+            self._suit = 'Clubs'
+        elif self._card_num <= 52:
+            self._suit = 'Diamonds'
 
-        # Hearts suits
-        elif self.card_num is 13:
-            self.card_rank = "Ace"
-            self.card_suit = "Hearts"
-        elif self.card_num > 13 and self.card_num < 23:
-            self.card_rank = str(self.card_num - 12)
-            self.card_suit = "Hearts"
-        elif self.card_num is 23:
-            self.card_rank = "Jack"
-            self.card_suit = "Hearts"
-        elif self.card_num is 24:
-            self.card_rank = "Queen"
-            self.card_suit = "Hearts"
-        elif self.card_num is 25:
-            self.card_rank = "King"
-            self.card_suit = "Hearts"
-
-        # Clovers suits
-        elif self.card_num is 26:
-            self.card_rank = "Ace"
-            self.card_suit = "Clubs"
-        elif self.card_num > 26 and self.card_num < 36:
-            self.card_rank = str(self.card_num - 25)
-            self.card_suit = "Clubs"
-        elif self.card_num is 36:
-            self.card_rank = "Jack"
-            self.card_suit = "Clubs"
-        elif self.card_num is 37:
-            self.card_rank = "Queen"
-            self.card_suit = "Clubs"
-        elif self.card_num is 38:
-            self.card_rank = "King"
-            self.card_suit = "Clubs"
-
-        # Diamonds suits
-        elif self.card_num is 39:
-            self.card_rank = "Ace"
-            self.card_suit = "Diamonds"
-        elif self.card_num > 39 and self.card_num < 49:
-            self.card_rank = str(self.card_num - 38)
-            self.card_suit = "Diamonds"
-        elif self.card_num is 49:
-            self.card_rank = "Jack"
-            self.card_suit = "Diamonds"
-        elif self.card_num is 50:
-            self.card_rank = "Queen"
-            self.card_suit = "Diamonds"
-        elif self.card_num is 51:
-            self.card_rank = "King"
-            self.card_suit = "Diamonds"
+        # Uses the card's number to find its face/value
+        self._name = self._card_num % 13
+        if self._name == 1:
+            self._name = 'Ace'
+            self._value = 11
+        elif self._name == 11:
+            self._name = 'Jack'
+            self._value = 10
+        elif self._name == 12:
+            self._name = 'Queen'
+            self._value = 10
+        elif self._name == 0:
+            self._name = 'King'
+            self._value = 10
         else:
-            print("Error: card_num not a value between 0-51")
+            self._value = self._name
 
     def get_suit(self):
         """
         :return String representing the suit of the card, Spades, Clovers,
             Clubs, Hearts
         """
-        return self.card_suit
+        return self._suit
 
     def get_rank(self):
         """
         :return String representing rank of the card, Aces, Jack, Queen,
             King, or number of the card
         """
-        return self.card_rank
+        return str(self._name)
 
     def get_value(self):
         """
         :return String representing value of the card between 0 to 51
         """
-        return self.card_num
+        return self._value
 
     def face_down(self):
         """
         Method flips the card face-down, cards are face-down by default.
             False is equivalent to down
         """
-        self.card_face = False
+        self._face = False
 
     def face_up(self):
         """
         Method flips hidden cards face-up, making them no longer hidden.
             True is equivalent to up
         """
-        self.card_face = True
+        self._face = True
 
     def __str__(self):
         """
@@ -139,7 +97,7 @@ class Card:
             returns "5 of Diamonds", if the card is face down, returns
             "<facedown>"
         """
-        if self.card_face is True:
-            return str(self.card_rank + " of " + self.card_suit)
-        else:
+        if not self._face:
             return "<facedown>"
+        else:
+            return str(self._name) + " of " + self._suit
