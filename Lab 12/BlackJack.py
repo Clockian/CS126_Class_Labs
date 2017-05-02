@@ -19,7 +19,7 @@ class Blackjack:
         :param starting_dollars:
         """
         self._active = False
-        self._chipbank = ChipBank(starting_dollars)
+        self.bank = ChipBank(starting_dollars)
         self._deck = self.build_deck()
         self._player_hand = BlackjackHand()
         self._dealer_hand = BlackjackHand()
@@ -57,7 +57,7 @@ class Blackjack:
         """
         :return: The current chipbank of the game
         """
-        return self._chipbank
+        return self.bank
 
     def start_hand(self, wager):
         """
@@ -72,15 +72,17 @@ class Blackjack:
         """
         self._active = True
         self._wager = wager
-        self._chipbank.withdraw(wager)
+        self.bank.withdraw(wager)
 
         self._player_hand.add_card(self.draw())
         self._player_hand.add_card(self.draw())
+        self._player_hand.face_up_all()
         print("your starting hand: " + str(self._player_hand))
         fd_card = self.draw()
         fd_card.face_down()
         self._dealer_hand.add_card(self.draw())
         self._dealer_hand.add_card(fd_card)
+        self._dealer_hand.face_up_dealer_initial()
         print("dealer's hand: " + str(self._dealer_hand))
 
     def hit(self):
@@ -90,6 +92,7 @@ class Blackjack:
         to stand. This method takes no parameters, and has no return value.
         """
         card = self.draw()
+        card.face_up()
         self._player_hand.add_card(card)
         print("drew a " + str(card))
         print("player's hand: " + str(self._player_hand))
@@ -110,8 +113,10 @@ class Blackjack:
 
         while self._dealer_hand.get_value() <= 16:
             card = self.draw()
+            card.face_up()
             print("drew a " + str(card))
             self._dealer_hand.add_card(card)
+            print("Dealer's hand: " + str(self._dealer_hand))
 
         if self._dealer_hand.get_value() == self._player_hand.get_value():
             self.end_hand("push")
@@ -138,11 +143,11 @@ class Blackjack:
         """
         self._active = False
         if outcome == "push":
-            self._chipbank.deposit(self._wager)
+            self.bank.deposit(self._wager)
         elif outcome == "lose":
             print("lose")
         else:
-            self._chipbank.deposit(self._wager * 2)
+            self.bank.deposit(self._wager * 2)
 
     def game_active(self):
         """

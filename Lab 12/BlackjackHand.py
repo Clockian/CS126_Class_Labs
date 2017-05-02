@@ -40,12 +40,24 @@ class BlackjackHand:
                         break
         return total
 
+    def clear_hand(self):
+        """
+        Removes all cards from the hand
+        """
+        self._dealt()
+
     def face_up_all(self):
         """
         Flips all current cards in hand to face-up
         """
         for i in self._dealt:
             i.face_up()
+
+    def face_up_dealer_initial(self):
+        """
+        Turn up the first dealt of the dealer's cards
+        """
+        self._dealt[0].face_up()
 
     def __str__(self):
         """
