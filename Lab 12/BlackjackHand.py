@@ -21,11 +21,12 @@ class BlackjackHand:
 
     def get_value(self):
         """
-        Returns a numeric point value of the current hand. This should be the sum
-        of the point values of each card. In our implementation of blackjack, an Ace
-        should be either 11 points, or 1, to give the player the highest score without
-        exceeding 21. Hint: First count the total points assuming all aces are 11, along
-        with the number of aces, then decrement point total as the rules allow.
+        Returns a numeric point value of the current hand. This should be the
+        sum of the point values of each card. In our implementation of
+        blackjack, an Ace should be either 11 points, or 1, to give the player
+        the highest score without exceeding 21. Hint: First count the total
+        points assuming all aces are 11, along with the number of aces, then
+        decrement point total as the rules allow.
         :return A numeric value representing the value of the hand.
         """
         total = 0
@@ -44,7 +45,7 @@ class BlackjackHand:
         """
         Removes all cards from the hand
         """
-        self._dealt()
+        self._dealt = []
 
     def face_up_all(self):
         """
@@ -61,12 +62,13 @@ class BlackjackHand:
 
     def __str__(self):
         """
-        Returns a string representation of the current hand. The resulting string should
-        contain the __str__() value of each card, delimited by commas
+        Returns a string representation of the current hand. The resulting
+        string should contain the __str__() value of each card, delimited by
+        commas
         :return A string representing all the cards in the hand
         """
         built_str = ""
-        for i,v in enumerate(self._dealt):
+        for i, v in enumerate(self._dealt):
             if i != 0:
                 built_str += ", "
             built_str += str(v)
